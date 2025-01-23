@@ -1,0 +1,46 @@
+{
+  "name": "vsc-icon-maker",
+  "version": "0.0.1",
+  "description": "useful functions to improve create vscode icon themes",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepublish": "pnpm build",
+    "build": "tsup",
+    "lint": "biome check --fix",
+    "lint-staged": "lint-staged --allow-empty",
+    "prepare": "husky"
+  },
+  "repository": {
+    "url": "https://github.com/rafaScalet/VSC-Icon-Maker",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/rafaScalet/VSC-Icon-Maker/issues",
+    "email": "rafaelscalet2018@gmail.com"
+  },
+  "lint-staged": {
+    "*.ts": ["pnpm lint"],
+    "*.json": ["pnpm lint"]
+  },
+  "keywords": [
+    "utils",
+    "vscode",
+    "vscode-utils",
+    "vscode-icons",
+    "icons",
+    "icon-maker"
+  ],
+  "author": "rafascalet",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.10.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

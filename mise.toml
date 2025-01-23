@@ -1,0 +1,9 @@
+[tools]
+node = "lts-jod"
+pnpm = "9"
+
+[env]
+
+[env._]
+file = ".env*"
+path = "./node_modules/.bin/"

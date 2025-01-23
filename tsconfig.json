@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noEmit": true,
+    "allowJs": false,
+    "declaration": false,
+    "noUnusedParameters": false,
+    "noUncheckedIndexedAccess": true
+  },
+  "files": ["./src/index.ts"]
+}
