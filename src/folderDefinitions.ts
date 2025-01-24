@@ -19,5 +19,22 @@ export function generateFolders(theme: IconTheme) {
     return acc;
   }, {});
 
-  return { folderDefinitions };
+  const folderNames: Record<string, string> = {};
+
+  for (const [key, values] of Object.entries(theme.folders)) {
+    for (const value of values) {
+      const folderNameInfo = {
+        item: key,
+        prefix: theme.prefix?.folder,
+        suffix: theme.suffix?.folder,
+        separator: theme.separator,
+      };
+      folderNames[`${value}`] = getName(folderNameInfo);
+      folderNames[`.${value}`] = getName(folderNameInfo);
+      folderNames[`_${value}`] = getName(folderNameInfo);
+      folderNames[`__${value}__`] = getName(folderNameInfo);
+    }
+  }
+
+  return { folderDefinitions, folderNames };
 }

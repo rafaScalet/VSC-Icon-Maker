@@ -3,11 +3,11 @@ import { generateFolders } from './folderDefinitions';
 import type { IconTheme } from './types/IconTheme';
 
 export function createIconTheme(theme: IconTheme) {
-  const { folderDefinitions } = generateFolders(theme);
+  const { folderDefinitions, folderNames } = generateFolders(theme);
 
   const iconDefinitions = { ...folderDefinitions };
 
-  const iconTheme = { iconDefinitions };
+  const iconTheme = { iconDefinitions, folderNames };
 
   writeFile(theme.filePath, JSON.stringify(iconTheme), (err) => {
     if (err) throw err;
