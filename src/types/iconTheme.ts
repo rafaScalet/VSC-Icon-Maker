@@ -1,4 +1,3 @@
-import type { FileAndFolder } from './fileAndFolder';
 import type { FileDefinitions } from './fileDefinitions';
 import type { FolderDefinitions } from './folderDefinitions';
 
@@ -10,11 +9,17 @@ export type IconTheme = {
   /**
    * path to the directory of icons, can be a string for a unique directory or an object, for separate files and folders
    */
-  iconsPath: FileAndFolder;
+  iconsPath: {
+    file: string;
+    folder: string;
+    expanded?: string;
+  };
   /**
    * default icons for file, folder and rootFolder
    */
-  defaultIcons: FileAndFolder & {
+  defaultIcons: {
+    file: string;
+    folder: string;
     rootFolder: string;
   };
   /**
@@ -28,13 +33,22 @@ export type IconTheme = {
   /**
    * prefix to be used when generating icon paths
    */
-  prefix?: FileAndFolder;
+  prefix?: {
+    file: string;
+    folder: string;
+    expanded?: string;
+  };
   /**
    * suffix to be used when generating icon paths
    */
-  suffix?: FileAndFolder;
+  suffix?: {
+    file: string;
+    folder: string;
+    expanded?: string;
+  };
   /**
    * separator to be used when generating icon paths
    */
   separator?: string;
+  hasExpandedFolder?: boolean;
 };

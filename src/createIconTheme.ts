@@ -1,13 +1,13 @@
 import { writeFile } from 'node:fs';
 import { generateFolders } from './folderDefinitions';
-import type { IconTheme } from './types/IconTheme';
+import type { IconTheme } from './types/iconTheme';
 
 export function createIconTheme(theme: IconTheme) {
-  const { folderDefinitions, folderNames } = generateFolders(theme);
+  const { folderDefinitions, ...folderRest } = generateFolders(theme);
 
   const iconDefinitions = { ...folderDefinitions };
 
-  const iconTheme = { iconDefinitions, folderNames };
+  const iconTheme = { iconDefinitions, ...folderRest };
 
   writeFile(theme.filePath, JSON.stringify(iconTheme), (err) => {
     if (err) throw err;
