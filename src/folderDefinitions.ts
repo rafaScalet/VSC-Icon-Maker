@@ -16,6 +16,48 @@ export function generateFolders(theme: IconTheme) {
 
   const folders = Object.keys(theme.folders);
 
+  const folder = getName({
+    item: theme.defaultIcons.folder,
+    prefix: prefix?.folder,
+    suffix: suffix?.folder,
+    separator,
+  });
+
+  const rootFolder = getName({
+    item: theme.defaultIcons.rootFolder,
+    prefix: prefix?.folder,
+    suffix: suffix?.folder,
+    separator,
+  });
+
+  let folderExpanded = folder;
+  let rootFolderExpanded = rootFolder;
+
+  if (hasExpanded) {
+    folderExpanded = getName({
+      item: theme.defaultIcons.folder,
+      prefix: prefix?.expanded,
+      suffix: suffix?.expanded,
+      separator,
+    });
+
+    rootFolderExpanded = getName({
+      item: theme.defaultIcons.rootFolder,
+      prefix: prefix?.expanded,
+      suffix: suffix?.expanded,
+      separator,
+    });
+  }
+
+  const initialInfo = {
+    [folder]: { iconPath: `${iconsPath.folder}/${folder}.svg` },
+    [rootFolder]: { iconPath: `${iconsPath.folder}/${rootFolder}.svg` },
+    [folderExpanded]: { iconPath: `${iconsPath.folder}/${folderExpanded}.svg` },
+    [rootFolderExpanded]: {
+      iconPath: `${iconsPath.folder}/${rootFolderExpanded}.svg`,
+    },
+  };
+
   const folderDefinitions = folders.reduce((acc, item) => {
     const folderName = getName({
       item,
@@ -42,7 +84,7 @@ export function generateFolders(theme: IconTheme) {
     }
 
     return acc;
-  }, {});
+  }, initialInfo);
 
   const folderNames: Record<string, string> = {};
 
@@ -68,8 +110,8 @@ export function generateFolders(theme: IconTheme) {
       for (const value of values) {
         const folderNameExpandedInfo = {
           item: key,
-          prefix: prefix?.expanded || '',
-          suffix: suffix?.expanded || '',
+          prefix: prefix?.expanded,
+          suffix: suffix?.expanded,
           separator,
         };
         folderNamesExpanded[`${value}`] = getName(folderNameExpandedInfo);
@@ -81,10 +123,12 @@ export function generateFolders(theme: IconTheme) {
   }
 
   return {
-    folder: theme.defaultIcons.folder,
-    folderExpanded: theme.defaultIcons.folder,
-    rootFolder: theme.defaultIcons.rootFolder,
-    rootFolderExpanded: theme.defaultIcons.rootFolder,
+    defaultInfoFolder: {
+      folder,
+      rootFolder,
+      folderExpanded,
+      rootFolderExpanded,
+    },
     folderDefinitions,
     folderNames,
     folderNamesExpanded,

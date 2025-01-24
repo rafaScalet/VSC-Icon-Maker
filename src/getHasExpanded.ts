@@ -17,13 +17,13 @@ export function getHasExpanded({
     );
   }
 
-  if (iconsPath.expanded && !(suffix?.expanded && prefix?.expanded)) {
+  if (iconsPath.expanded && !(suffix?.expanded || prefix?.expanded)) {
     throw new Error(
       'you need to specify prefix.expanded or suffix.expanded if you are using iconsPath.expanded',
     );
   }
 
-  if (!(suffix?.expanded && prefix?.expanded)) return false;
+  if (!suffix?.expanded && !prefix?.expanded) return false;
 
   return true;
 }

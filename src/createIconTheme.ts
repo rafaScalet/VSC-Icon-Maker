@@ -1,13 +1,23 @@
 import { writeFile } from 'node:fs';
+import { generateFiles } from './fileDefinitions';
 import { generateFolders } from './folderDefinitions';
 import type { IconTheme } from './types/iconTheme';
 
 export function createIconTheme(theme: IconTheme) {
-  const { folderDefinitions, ...folderRest } = generateFolders(theme);
+  const { folderDefinitions, defaultInfoFolder, ...folderRest } =
+    generateFolders(theme);
+  const { fileDefinitions, defaultInfoFile, ...fileRest } =
+    generateFiles(theme);
 
-  const iconDefinitions = { ...folderDefinitions };
+  const iconDefinitions = { ...fileDefinitions, ...folderDefinitions };
 
-  const iconTheme = { iconDefinitions, ...folderRest };
+  const iconTheme = {
+    ...defaultInfoFile,
+    ...defaultInfoFolder,
+    iconDefinitions,
+    ...folderRest,
+    ...fileRest,
+  };
 
   writeFile(theme.filePath, JSON.stringify(iconTheme), (err) => {
     if (err) throw err;
@@ -19,22 +29,40 @@ export function createIconTheme(theme: IconTheme) {
 createIconTheme({
   filePath: 'src/test.json',
   defaultIcons: {
-    file: 'file',
-    folder: 'folder',
+    file: 'icon',
+    folder: 'icon',
     rootFolder: 'root',
   },
-  files: {},
+  files: {
+    js: {
+      ext: ['js', 'cjs', 'mjs'],
+      langId: ['javascript'],
+      name: ['jsconfig.json'],
+    },
+    ts: {
+      ext: ['ts', 'cts', 'mts'],
+      langId: ['typescript'],
+      name: ['tsconfig.json'],
+    },
+  },
   folders: {
     vscode: ['vscode'],
     models: ['models'],
   },
+  suffix: {
+    folder: '',
+    file: '',
+    expanded: 'expanded',
+  },
   prefix: {
     folder: 'folder',
+    expanded: 'folder',
     file: 'file',
   },
   separator: '-',
   iconsPath: {
     file: 'src/file',
     folder: 'src/folder',
+    expanded: 'src/folder',
   },
 });
