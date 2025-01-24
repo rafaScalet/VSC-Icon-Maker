@@ -1,15 +1,22 @@
 import { writeFile } from 'node:fs';
+import { generateFolders } from './folderDefinitions';
 import type { IconTheme } from './types/IconTheme';
 
-export function iconTheme(theme: IconTheme) {
-  writeFile(theme.filePath, JSON.stringify(theme), (err) => {
+export function createIconTheme(theme: IconTheme) {
+  const { folderDefinitions } = generateFolders(theme);
+
+  const iconDefinitions = { ...folderDefinitions };
+
+  const iconTheme = { iconDefinitions };
+
+  writeFile(theme.filePath, JSON.stringify(iconTheme), (err) => {
     if (err) throw err;
 
     console.log(`the file theme has been saved at ${theme.filePath}`);
   });
 }
 
-iconTheme({
+createIconTheme({
   filePath: 'src/test.json',
   defaultIcons: {
     file: 'file',
@@ -17,7 +24,15 @@ iconTheme({
     rootFolder: 'root',
   },
   files: {},
-  folders: {},
+  folders: {
+    vscode: ['vscode'],
+    models: ['models'],
+  },
+  prefix: {
+    folder: 'folder',
+    file: 'file',
+  },
+  separator: '-',
   iconsPath: {
     file: 'src/file',
     folder: 'src/folder',
