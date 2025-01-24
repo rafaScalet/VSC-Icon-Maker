@@ -1,1 +1,2 @@
-console.log('hello world');
+export * from './createIconTheme';
+export * from './types/index';

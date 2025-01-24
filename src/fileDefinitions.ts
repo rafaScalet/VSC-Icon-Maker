@@ -32,7 +32,11 @@ export function generateFiles(theme: IconTheme) {
     return acc;
   }, initialInfo);
 
-  const tempResult = {
+  const tempResult: {
+    fileExtensions: Record<string, string>;
+    languageIds: Record<string, string>;
+    fileNames: Record<string, string>;
+  } = {
     fileExtensions: {},
     languageIds: {},
     fileNames: {},

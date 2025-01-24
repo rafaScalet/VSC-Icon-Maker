@@ -5,13 +5,15 @@ import type { IconTheme } from './types/iconTheme';
 export function generateFolders(theme: IconTheme) {
   const { prefix, suffix, separator, iconsPath } = theme;
 
-  let hasExpanded: boolean;
+  let hasExpanded = false;
 
   try {
     hasExpanded = getHasExpanded(theme);
   } catch (error) {
-    console.log(error.message);
-    process.exit(1);
+    if (error instanceof Error) {
+      console.log(error.message);
+      process.exit(1);
+    }
   }
 
   const folders = Object.keys(theme.folders);

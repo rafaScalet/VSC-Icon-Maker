@@ -1,16 +1,16 @@
 {
   "name": "vsc-icon-maker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "useful functions to improve create vscode icon themes",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "prepublish": "pnpm build",
     "build": "tsup",
     "lint": "biome check --fix",
     "lint-staged": "lint-staged --allow-empty",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublish": "pnpm build"
   },
   "repository": {
     "url": "https://github.com/rafaScalet/VSC-Icon-Maker",
