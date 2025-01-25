@@ -57,11 +57,11 @@ export type IconTheme = {
     /**
      * prefix for files
      */
-    file: string;
+    file?: string;
     /**
      * prefix for folders
      */
-    folder: string;
+    folder?: string;
     /**
      * prefix for folders when they are expanded
      */
@@ -74,11 +74,11 @@ export type IconTheme = {
     /**
      * suffix for files
      */
-    file: string;
+    file?: string;
     /**
      * suffix for folders
      */
-    folder: string;
+    folder?: string;
     /**
      * suffix for folders when they are expanded
      */

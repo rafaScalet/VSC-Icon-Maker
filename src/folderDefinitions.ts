@@ -78,6 +78,14 @@ export function generateFolders(theme: IconTheme) {
     };
 
     if (hasExpanded) {
+      if (prefix?.folder && !prefix?.expanded) {
+        prefix.expanded = prefix.folder;
+      }
+
+      if (suffix?.folder && !suffix?.expanded) {
+        suffix.expanded = suffix.folder;
+      }
+
       const folderNameExpanded = getName({
         item,
         prefix: prefix?.expanded,
@@ -106,7 +114,6 @@ export function generateFolders(theme: IconTheme) {
       folderNames[`${value}`] = getName(folderNameInfo);
       folderNames[`.${value}`] = getName(folderNameInfo);
       folderNames[`_${value}`] = getName(folderNameInfo);
-      // folderNames[`__${value}__`] = getName(folderNameInfo);
     }
   }
 
@@ -124,7 +131,6 @@ export function generateFolders(theme: IconTheme) {
         folderNamesExpanded[`${value}`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`.${value}`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`_${value}`] = getName(folderNameExpandedInfo);
-        folderNamesExpanded[`__${value}__`] = getName(folderNameExpandedInfo);
       }
     }
   }
