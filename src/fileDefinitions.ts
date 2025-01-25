@@ -1,8 +1,11 @@
+import { getIconPath } from './getIconPath';
 import { getName } from './getNames';
 import type { IconTheme } from './types/iconTheme';
 
 export function generateFiles(theme: IconTheme) {
-  const { prefix, suffix, separator, iconsPath } = theme;
+  const { prefix, suffix, separator } = theme;
+
+  const { fileIconPath } = getIconPath(theme);
 
   const files = Object.keys(theme.files);
 
@@ -14,7 +17,7 @@ export function generateFiles(theme: IconTheme) {
   });
 
   const initialInfo = {
-    [file]: { iconPath: `${iconsPath.file}/${file}.svg` },
+    [file]: { iconPath: `${fileIconPath}/${file}.svg` },
   };
 
   const fileDefinitions = files.reduce((acc, item) => {
@@ -26,7 +29,7 @@ export function generateFiles(theme: IconTheme) {
     });
 
     acc[fileName] = {
-      iconPath: `${iconsPath.file}/${fileName}.svg`,
+      iconPath: `${fileIconPath}/${fileName}.svg`,
     };
 
     return acc;

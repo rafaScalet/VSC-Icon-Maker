@@ -9,20 +9,22 @@ export type IconTheme = {
   /**
    * path to the directory of icons, can be a string for a unique directory or an object, for separate files and folders
    */
-  iconsPath: {
-    /**
-     * path for file icons
-     */
-    file: string;
-    /**
-     * path for folder icons
-     */
-    folder: string;
-    /**
-     * path for expanded folder icons
-     */
-    expanded?: string;
-  };
+  iconsPath:
+    | string
+    | {
+        /**
+         * path for file icons
+         */
+        file: string;
+        /**
+         * path for folder icons
+         */
+        folder: string;
+        /**
+         * path for expanded folder icons
+         */
+        expanded: string;
+      };
   /**
    * default icons for file, folder and rootFolder
    */

@@ -1,9 +1,12 @@
 import { getHasExpanded } from './getHasExpanded';
+import { getIconPath } from './getIconPath';
 import { getName } from './getNames';
 import type { IconTheme } from './types/iconTheme';
 
 export function generateFolders(theme: IconTheme) {
-  const { prefix, suffix, separator, iconsPath } = theme;
+  const { prefix, suffix, separator } = theme;
+
+  const { expandedIconPath, folderIconPath } = getIconPath(theme);
 
   let hasExpanded = false;
 
@@ -52,11 +55,13 @@ export function generateFolders(theme: IconTheme) {
   }
 
   const initialInfo = {
-    [folder]: { iconPath: `${iconsPath.folder}/${folder}.svg` },
-    [rootFolder]: { iconPath: `${iconsPath.folder}/${rootFolder}.svg` },
-    [folderExpanded]: { iconPath: `${iconsPath.folder}/${folderExpanded}.svg` },
+    [folder]: { iconPath: `${folderIconPath}/${folder}.svg` },
+    [rootFolder]: { iconPath: `${folderIconPath}/${rootFolder}.svg` },
+    [folderExpanded]: {
+      iconPath: `${expandedIconPath}/${folderExpanded}.svg`,
+    },
     [rootFolderExpanded]: {
-      iconPath: `${iconsPath.folder}/${rootFolderExpanded}.svg`,
+      iconPath: `${expandedIconPath}/${rootFolderExpanded}.svg`,
     },
   };
 
@@ -69,7 +74,7 @@ export function generateFolders(theme: IconTheme) {
     });
 
     acc[folderName] = {
-      iconPath: `${iconsPath.folder}/${folderName}.svg`,
+      iconPath: `${folderIconPath}/${folderName}.svg`,
     };
 
     if (hasExpanded) {
@@ -81,7 +86,7 @@ export function generateFolders(theme: IconTheme) {
       });
 
       acc[folderNameExpanded] = {
-        iconPath: `${iconsPath.expanded}/${folderNameExpanded}.svg`,
+        iconPath: `${expandedIconPath}/${folderNameExpanded}.svg`,
       };
     }
 
@@ -101,7 +106,7 @@ export function generateFolders(theme: IconTheme) {
       folderNames[`${value}`] = getName(folderNameInfo);
       folderNames[`.${value}`] = getName(folderNameInfo);
       folderNames[`_${value}`] = getName(folderNameInfo);
-      folderNames[`__${value}__`] = getName(folderNameInfo);
+      // folderNames[`__${value}__`] = getName(folderNameInfo);
     }
   }
 
