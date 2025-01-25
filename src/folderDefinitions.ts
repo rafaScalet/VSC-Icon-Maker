@@ -1,6 +1,7 @@
 import { getHasExpanded } from './getHasExpanded';
 import { getIconPath } from './getIconPath';
 import { getName } from './getNames';
+import { customPluralize } from './lib';
 import type { IconTheme } from './types/iconTheme';
 
 export function generateFolders(theme: IconTheme) {
@@ -103,7 +104,20 @@ export function generateFolders(theme: IconTheme) {
 
   const folderNames: Record<string, string> = {};
 
-  for (const [key, values] of Object.entries(theme.folders)) {
+  const pluralizedFolders = Object.entries(theme.folders).reduce(
+    (acc, [key, values]) => {
+      acc[key] = values.reduce((arr, value) => {
+        arr.push(value, customPluralize(value));
+
+        return arr;
+      }, [] as string[]);
+
+      return acc;
+    },
+    {} as Record<string, string[]>,
+  );
+
+  for (const [key, values] of Object.entries(pluralizedFolders)) {
     for (const value of values) {
       const folderNameInfo = {
         item: key,
@@ -114,6 +128,7 @@ export function generateFolders(theme: IconTheme) {
       folderNames[`${value}`] = getName(folderNameInfo);
       folderNames[`.${value}`] = getName(folderNameInfo);
       folderNames[`_${value}`] = getName(folderNameInfo);
+      folderNames[`__${value}__`] = getName(folderNameInfo);
     }
   }
 
@@ -131,6 +146,7 @@ export function generateFolders(theme: IconTheme) {
         folderNamesExpanded[`${value}`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`.${value}`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`_${value}`] = getName(folderNameExpandedInfo);
+        folderNamesExpanded[`__${value}__`] = getName(folderNameExpandedInfo);
       }
     }
   }

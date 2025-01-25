@@ -7,18 +7,25 @@ settings:
 importers:
 
   .:
+    dependencies:
+      pluralize:
+        specifier: ^8.0.0
+        version: 8.0.0
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
       '@types/node':
-        specifier: ^22.10.9
+        specifier: ^22.10.7
         version: 22.10.9
+      '@types/pluralize':
+        specifier: ^0.0.33
+        version: 0.0.33
       husky:
         specifier: ^9.1.7
         version: 9.1.7
       lint-staged:
-        specifier: ^15.4.2
+        specifier: ^15.4.1
         version: 15.4.2
       tsup:
         specifier: ^8.3.5
@@ -506,6 +513,9 @@ packages:
   '@types/node@22.10.9':
     resolution: {integrity: sha512-Ir6hwgsKyNESl/gLOcEz3krR4CBGgliDqBQ2ma4wIhEx0w+xnoeTq3tdrNw15kU3SxogDjOgv9sqdtLW8mIHaw==}
 
+  '@types/pluralize@0.0.33':
+    resolution: {integrity: sha512-JOqsl+ZoCpP4e8TDke9W79FDcSgPAR0l6pixx2JHkhnRjvShyYiAYw2LVsnA7K08Y6DeOnaU6ujmENO4os/cYg==}
+
   ansi-escapes@7.0.0:
     resolution: {integrity: sha512-GdYO7a61mR0fOlAsvC9/rIHf7L96sBc6dEWzeOu+KAea5bZyQRPIpojrVoI4AXGJS/ycu/fBTdLrUkA4ODrvjw==}
     engines: {node: '>=18'}
@@ -817,6 +827,10 @@ packages:
   pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
+
+  pluralize@8.0.0:
+    resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
+    engines: {node: '>=4'}
 
   postcss-load-config@6.0.1:
     resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
@@ -1284,6 +1298,8 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
+  '@types/pluralize@0.0.33': {}
+
   ansi-escapes@7.0.0:
     dependencies:
       environment: 1.1.0
@@ -1595,6 +1611,8 @@ snapshots:
   pidtree@0.6.0: {}
 
   pirates@4.0.6: {}
+
+  pluralize@8.0.0: {}
 
   postcss-load-config@6.0.1(tsx@4.19.2)(yaml@2.7.0):
     dependencies:
