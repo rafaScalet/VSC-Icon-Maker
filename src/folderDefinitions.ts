@@ -1,7 +1,7 @@
+import pluralize from 'pluralize';
 import { getHasExpanded } from './getHasExpanded';
 import { getIconPath } from './getIconPath';
 import { getName } from './getNames';
-import { customPluralize } from './lib';
 import type { IconTheme } from './types/iconTheme';
 
 export function generateFolders(theme: IconTheme) {
@@ -107,7 +107,7 @@ export function generateFolders(theme: IconTheme) {
   const pluralizedFolders = Object.entries(theme.folders).reduce(
     (acc, [key, values]) => {
       acc[key] = values.reduce((arr, value) => {
-        arr.push(value, customPluralize(value));
+        arr.push(value, pluralize(value));
 
         return arr;
       }, [] as string[]);
