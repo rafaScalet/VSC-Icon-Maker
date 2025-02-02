@@ -1,6 +1,6 @@
 {
   "name": "vsc-icon-maker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "useful functions to improve create vscode icon themes",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

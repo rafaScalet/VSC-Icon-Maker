@@ -128,6 +128,7 @@ export function generateFolders(theme: IconTheme) {
       folderNames[`${value}`] = getName(folderNameInfo);
       folderNames[`.${value}`] = getName(folderNameInfo);
       folderNames[`_${value}`] = getName(folderNameInfo);
+      folderNames[`(${value})`] = getName(folderNameInfo);
       folderNames[`__${value}__`] = getName(folderNameInfo);
     }
   }
@@ -146,6 +147,7 @@ export function generateFolders(theme: IconTheme) {
         folderNamesExpanded[`${value}`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`.${value}`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`_${value}`] = getName(folderNameExpandedInfo);
+        folderNamesExpanded[`(${value})`] = getName(folderNameExpandedInfo);
         folderNamesExpanded[`__${value}__`] = getName(folderNameExpandedInfo);
       }
     }
