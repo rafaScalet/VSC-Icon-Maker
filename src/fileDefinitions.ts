@@ -16,8 +16,8 @@ export function generateFiles(theme: IconTheme) {
     separator,
   });
 
-  const initialInfo = {
-    [file]: { iconPath: `${fileIconPath}/${file}.svg` },
+  const initialInfo: Record<string, { iconPath: string }> = {
+    f: { iconPath: `${fileIconPath}/${file}.svg` },
   };
 
   const fileDefinitions = files.reduce((acc, item) => {
@@ -28,7 +28,7 @@ export function generateFiles(theme: IconTheme) {
       separator,
     });
 
-    acc[fileName] = {
+    acc[`f${files.indexOf(item)}`] = {
       iconPath: `${fileIconPath}/${fileName}.svg`,
     };
 
@@ -50,36 +50,23 @@ export function generateFiles(theme: IconTheme) {
 
     if (!fileIconType) continue;
 
+    const fileIndex = `f${files.indexOf(file)}`;
+
     if (fileIconType.ext) {
       for (const ext of fileIconType.ext) {
-        tempResult.fileExtensions[ext] = getName({
-          item: file,
-          prefix: prefix?.file,
-          suffix: suffix?.file,
-          separator,
-        });
+        tempResult.fileExtensions[ext] = fileIndex;
       }
     }
 
     if (fileIconType.langId) {
       for (const langId of fileIconType.langId) {
-        tempResult.languageIds[langId] = getName({
-          item: file,
-          prefix: prefix?.file,
-          suffix: suffix?.file,
-          separator,
-        });
+        tempResult.languageIds[langId] = fileIndex;
       }
     }
 
     if (fileIconType.name) {
       for (const name of fileIconType.name) {
-        tempResult.fileNames[name] = getName({
-          item: file,
-          prefix: prefix?.file,
-          suffix: suffix?.file,
-          separator,
-        });
+        tempResult.fileNames[name] = fileIndex;
       }
     }
   }
@@ -87,7 +74,7 @@ export function generateFiles(theme: IconTheme) {
   const { fileExtensions, fileNames, languageIds } = tempResult;
 
   return {
-    defaultInfoFile: { file },
+    defaultInfoFile: { file: 'f' },
     fileDefinitions,
     fileExtensions,
     fileNames,
