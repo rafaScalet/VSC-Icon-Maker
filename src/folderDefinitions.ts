@@ -119,17 +119,18 @@ export function generateFolders(theme: IconTheme) {
 
   for (const [key, values] of Object.entries(pluralizedFolders)) {
     for (const value of values) {
-      const folderNameInfo = {
+      const folderNameInfo = getName({
         item: key,
         prefix: prefix?.folder,
         suffix: suffix?.folder,
         separator: separator,
-      };
-      folderNames[`${value}`] = getName(folderNameInfo);
-      folderNames[`.${value}`] = getName(folderNameInfo);
-      folderNames[`_${value}`] = getName(folderNameInfo);
-      folderNames[`(${value})`] = getName(folderNameInfo);
-      folderNames[`__${value}__`] = getName(folderNameInfo);
+      });
+
+      folderNames[`${value}`] = folderNameInfo;
+      folderNames[`.${value}`] = folderNameInfo;
+      folderNames[`_${value}`] = folderNameInfo;
+      folderNames[`(${value})`] = folderNameInfo;
+      folderNames[`__${value}__`] = folderNameInfo;
     }
   }
 
@@ -138,17 +139,18 @@ export function generateFolders(theme: IconTheme) {
   if (hasExpanded) {
     for (const [key, values] of Object.entries(theme.folders)) {
       for (const value of values) {
-        const folderNameExpandedInfo = {
+        const folderNameExpandedInfo = getName({
           item: key,
-          prefix: prefix?.expanded,
-          suffix: suffix?.expanded,
-          separator,
-        };
-        folderNamesExpanded[`${value}`] = getName(folderNameExpandedInfo);
-        folderNamesExpanded[`.${value}`] = getName(folderNameExpandedInfo);
-        folderNamesExpanded[`_${value}`] = getName(folderNameExpandedInfo);
-        folderNamesExpanded[`(${value})`] = getName(folderNameExpandedInfo);
-        folderNamesExpanded[`__${value}__`] = getName(folderNameExpandedInfo);
+          prefix: prefix?.folder,
+          suffix: suffix?.folder,
+          separator: separator,
+        });
+
+        folderNames[`${value}`] = folderNameExpandedInfo;
+        folderNames[`.${value}`] = folderNameExpandedInfo;
+        folderNames[`_${value}`] = folderNameExpandedInfo;
+        folderNames[`(${value})`] = folderNameExpandedInfo;
+        folderNames[`__${value}__`] = folderNameExpandedInfo;
       }
     }
   }
