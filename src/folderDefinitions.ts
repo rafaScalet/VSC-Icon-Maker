@@ -29,6 +29,8 @@ export function generateFolders(theme: IconTheme) {
     separator,
   });
 
+  const folderKey = 'd';
+
   const rootFolder = getName({
     item: theme.defaultIcons.rootFolder,
     prefix: prefix?.folder,
@@ -36,8 +38,12 @@ export function generateFolders(theme: IconTheme) {
     separator,
   });
 
+  const rootFolderKey = 'r';
+
   let folderExpanded = folder;
+  let folderExpandedKey = folderKey;
   let rootFolderExpanded = rootFolder;
+  let rootFolderExpandedKey = rootFolderKey;
 
   if (hasExpanded) {
     folderExpanded = getName({
@@ -47,21 +53,25 @@ export function generateFolders(theme: IconTheme) {
       separator,
     });
 
+    folderExpandedKey = 'D';
+
     rootFolderExpanded = getName({
       item: theme.defaultIcons.rootFolder,
       prefix: prefix?.expanded,
       suffix: suffix?.expanded,
       separator,
     });
+
+    rootFolderExpandedKey = 'R';
   }
 
   const initialInfo = {
-    [folder]: { iconPath: `${folderIconPath}/${folder}.svg` },
-    [rootFolder]: { iconPath: `${folderIconPath}/${rootFolder}.svg` },
-    [folderExpanded]: {
+    [folderKey]: { iconPath: `${folderIconPath}/${folder}.svg` },
+    [rootFolderKey]: { iconPath: `${folderIconPath}/${rootFolder}.svg` },
+    [folderExpandedKey]: {
       iconPath: `${expandedIconPath}/${folderExpanded}.svg`,
     },
-    [rootFolderExpanded]: {
+    [rootFolderExpandedKey]: {
       iconPath: `${expandedIconPath}/${rootFolderExpanded}.svg`,
     },
   };
@@ -74,7 +84,7 @@ export function generateFolders(theme: IconTheme) {
       separator,
     });
 
-    acc[folderName] = {
+    acc[`d${folders.indexOf(item)}`] = {
       iconPath: `${folderIconPath}/${folderName}.svg`,
     };
 
@@ -94,7 +104,7 @@ export function generateFolders(theme: IconTheme) {
         separator,
       });
 
-      acc[folderNameExpanded] = {
+      acc[`D${folders.indexOf(item)}`] = {
         iconPath: `${expandedIconPath}/${folderNameExpanded}.svg`,
       };
     }
@@ -119,12 +129,7 @@ export function generateFolders(theme: IconTheme) {
 
   for (const [key, values] of Object.entries(pluralizedFolders)) {
     for (const value of values) {
-      const folderNameInfo = getName({
-        item: key,
-        prefix: prefix?.folder,
-        suffix: suffix?.folder,
-        separator: separator,
-      });
+      const folderNameInfo = `d${folders.indexOf(key)}`;
 
       folderNames[`${value}`] = folderNameInfo;
       folderNames[`.${value}`] = folderNameInfo;
@@ -137,30 +142,25 @@ export function generateFolders(theme: IconTheme) {
   const folderNamesExpanded = { ...folderNames };
 
   if (hasExpanded) {
-    for (const [key, values] of Object.entries(theme.folders)) {
+    for (const [key, values] of Object.entries(pluralizedFolders)) {
       for (const value of values) {
-        const folderNameExpandedInfo = getName({
-          item: key,
-          prefix: prefix?.folder,
-          suffix: suffix?.folder,
-          separator: separator,
-        });
+        const folderNameExpandedInfo = `D${folders.indexOf(key)}`;
 
-        folderNames[`${value}`] = folderNameExpandedInfo;
-        folderNames[`.${value}`] = folderNameExpandedInfo;
-        folderNames[`_${value}`] = folderNameExpandedInfo;
-        folderNames[`(${value})`] = folderNameExpandedInfo;
-        folderNames[`__${value}__`] = folderNameExpandedInfo;
+        folderNamesExpanded[`${value}`] = folderNameExpandedInfo;
+        folderNamesExpanded[`.${value}`] = folderNameExpandedInfo;
+        folderNamesExpanded[`_${value}`] = folderNameExpandedInfo;
+        folderNamesExpanded[`(${value})`] = folderNameExpandedInfo;
+        folderNamesExpanded[`__${value}__`] = folderNameExpandedInfo;
       }
     }
   }
 
   return {
     defaultInfoFolder: {
-      folder,
-      rootFolder,
-      folderExpanded,
-      rootFolderExpanded,
+      folder: folderKey,
+      rootFolder: rootFolderKey,
+      folderExpanded: folderExpandedKey,
+      rootFolderExpanded: rootFolderExpandedKey,
     },
     folderDefinitions,
     folderNames,

@@ -33,5 +33,9 @@ export function getHasExpanded(theme: IconTheme): boolean {
     );
   }
 
+  if (suffix) if (suffix.expanded === suffix.folder) return false;
+
+  if (prefix) if (prefix?.expanded === prefix?.folder) return false;
+
   return true;
 }
